@@ -1,0 +1,134 @@
+
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Algorithm</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/cover/">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body class=" body1 align text-white bg-dark container">
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="header">
+    <div>
+      <h3 class="float-md-start mb-0">About</h3>
+      <nav class="nav nav-masthead justify-content-center float-md-end">
+        <a class="nav-link active" aria-current="page" href="oslogin.html">Home</a>
+        <a class="nav-link active" href="index.html">Back</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="div1">
+
+    <h1>Lamport's Bakery Algorithm</h1>
+    <pre>
+      <dl>
+      <dd>
+        In Lamport's bakery algorithm, processes are treated as customers. In this, each
+        process waiting to enter its critical section gets a token number, and the process with the
+         lowest number enters the critical section. If two processes have the same token number,
+         the process with a lower process ID enters its critical section.
+      </dd>
+    <dt>
+      Algorithm :
+    </dt>
+    <dd>
+      do{
+          entering[i] :=  true; // show interest in critical section
+         // get a token number
+          number[i] := 1 + max(number[0],  number[1], ..., number[n - 1]);
+          entering [i] :=  false;
+          for ( j :=  0 ;  j {<} n; j++)
+          {
+       // busy wait until process Pj receives its token number
+              while (entering [j])
+              { ; } // do nothing
+             while (number[j] !=  0 &&  (number[j], j) < (number[i], i)) // token comparison
+               { ; } // do nothing
+             }
+              // critical section
+               number[i] :=  0;  // Exit section
+              // remainder section
+          } while(1);
+              Structure of process Pi for Lamport's bakery algorithm to critical section problem.  </dd>
+
+
+    <dt>Explanation -</dt>
+    <dt>
+      This algorithm uses the following two Boolean variables.
+
+      boolean entering[n];
+      int number[n];
+    </dt>
+    <dd>
+      ->All entering variables are initialized to false, and n integer variables numbers are all
+      initialized to 0. The value of integer variables is used to form token numbers.
+
+      ->When a process wishes to enter a critical section, it chooses a greater token number than
+       any earlier number.
+
+      ->Consider a process Pi wishes to enter a critical section, it sets
+
+      entering[i] to true to make other processes aware that it is choosing a token number. It then
+      chooses a token number greater than those held by other processes and writes its token number.
+       Then it sets entering[i] to false after reading them. Then It enters a loop to evaluate the
+       status of other processes. It waits until some other process Pj is choosing its token number.
+
+      ->Pi then waits until all processes with smaller token numbers or the same token number but
+      with higher priority are served fast.
+
+      ->When the process has finished with its critical section execution, it resets its number
+      variable to 0.
+
+      ->The Bakery algorithm meets all the requirements of the critical section problem.
+
+      Mutual Exclusion: we know that when no process is executing in its critical section, a process
+       with the lowest number is allowed to enter its critical section. Suppose two processes have
+       the same token number. In that case, the process with the lower process ID among these is
+       selected as the process ID of each process is distinct, so at a particular time, there wil
+       l be only one process executing in its critical section. Thus the requirement of mutual
+       Exclusion is met.
+      Progress: After selecting a token, a waiting process checks whether any other waiting process
+       has higher priority to enter its critical section. If there is no such process, P will
+       immediately enter its critical section. Thus meeting progress requirements.
+      Bounded Waiting: As awaiting, the process will enter its critical section when no other process
+      is in its critical section and
+      If its token number is the smallest among other waiting processes.
+      If token numbers are the same, it has the lowest process ID among other waiting processes.
+    </dd>
+    <dt>Advantages of Lamport's bakery algorithm</dt>
+    <dd>
+      ->Lamport's bakery algorithms are free from starvation.
+      ->Lamport's Bakery algorithm follows a FIFO.
+      ->Lamport's Bakery algorithm works with atomic registers.
+      ->Lamport's Bakery algorithm is one of the simplest known solutions to the mutual exclusion
+      problem for the general case of the N process.
+      ->This algorithm ensures the efficient use of shared resources in a multithreaded environment.
+
+    </dd>
+    <dt>Disadvantages of Lamport's bakery algorithm</dt>
+     <dd>
+       -> Lamport's bakery algorithm is unreliable as a failure of any one of the processes will
+       halt progress. It has a high message complexity of 3(N - 1) messages per entry/exit into the
+       critical section.
+
+     </dd>
+    </pre>
+
+</div>
+
+
+
+  </body>
+</html>

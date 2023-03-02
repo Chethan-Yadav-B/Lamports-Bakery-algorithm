@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="form3">
+      <form class="form">
+        <p>Enter the number of process</p>
+        <input id="process" type="text" name="" value="" placeholder="Number of process">
+      </form>
+      <button onclick="a()" type="submit" name="button">Enter</button>
+      <div class="">
+        <form class="form2" method="post">
+         <p id="p"></p>
+        </form>
+      </div>
+
+    </div>
+    <script>
+    async function a(){
+     document.getElementById("p").innerHTML="Enter the arrival time"
+     var form= document.querySelector('.form2')
+     let process= document.getElementById("process").value;
+     process=parseInt(process);
+     console.log(process);
+       for(var i=0;i<process;i=i+1){
+         var input=document.createElement("input");
+         input.type="text";
+         input.class="e1"
+         input.id=i;
+         input.placeholder="p"+i+" arrival time"
+         form.appendChild(input);
+
+     }
+
+      function b(){
+        var arrival_time=[];
+        for(var i=0;i<process;i=i+1){
+          arrival_time.push(parseInt(document.getElementById(i).value));
+      }
+      var num=[];
+      console.log(arrival_time);
+      for(var i=0;i<process;i=1+i){
+       num[i]=0;
+      }
+      var paragraph=document.createElement("pre");
+      paragraph.id=100;
+      form.appendChild(paragraph);
+      document.getElementById(100).innerHTML="process               token"
+      for(var i=0;i<process;i+=1){
+        num[i]=Math.max.apply(null,num)+1;
+        var min=Math.min.apply(null,arrival_time);
+        var index=arrival_time.indexOf(min);
+        arrival_time[index]=999;
+        var paragraph=document.createElement("pre");
+        paragraph.id=i+101;
+        form.appendChild(paragraph);
+        document.getElementById(i+101).innerHTML="  p"+index+"                    "+num[i];
+        console.log("  p"+index+"               "+num[i]);
+      }
+      }
+      document.ondblclick = () => {
+          b();
+}
+
+     }
+
+     //bakery algorithm
+
+
+    </script>
+
+      <!-- <script src="index.js" charset="utf-8"></script> -->
+  </body>
+</html>
